@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Fast-Shop</title>
+    <style>
+      body {
+        background-color: rgba(0, 0, 0, 0.737);
+      }
+      /*Nav Bar Css*/
+      * {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        /* background-color:rgba(0, 0, 0, 0.905);*/
+        background-color: rgb(81, 88, 86);
+        justify-content: space-between;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 0px;
+        height: 70px;
+        position: fixed;
+      }
+      .title {
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+      }
+      .titlename {
+        font-size: 30px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+        margin: 9px;
+        position: relative;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .searchBox {
+        margin: 25px;
+        height: 33px;
+        width: 280px;
+        background-color: white;
+        border-radius: 10px;
+        margin-left: 230px;
+      }
+      input {
+        width: 80%;
+        border: none;
+        margin-left: 15px;
+        outline: none;
+      }
+      .fa-search {
+        margin-top: 8px;
+        font-size: 16px;
+        color: black;
+        cursor: pointer;
+      }
+      .links {
+        padding: 20px;
+        margin-right: 15px;
+      }
+      a {
+        font-size: large;
+        text-decoration: none;
+        margin-right: 15px;
+        font-size: 25px;
+        color: white;
+      }
+      .fas.fa-shopping-cart {
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        margin-top: 5px;
+      }
+      /*Nav Bar Css End*/
+      .homePart {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+      }
+      .headingBox {
+        margin-top: 170px;
+        margin-left: 35px;
+        gap: 30px;
+      }
+      .imageBox {
+        margin-top: 150px;
+        margin-right: 50px;
+      }
+      .heading {
+        color: white;
+        letter-spacing: 0.2rem;
+      }
+      .btnDiv {
+        margin-top: 30px;
+        height: 10vh;
+        width: 30%;
+        margin-left: 70px;
+      }
+      .fancy-btn {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .fancy-btn:hover {
+        background: linear-gradient(135deg, #388e3c, #1b5e20);
+        transform: scale(1.05);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      }
+      .fancy-btn:active {
+        transform: scale(0.97);
+      }
+      .imageContainer {
+        margin-top: 30px;
+      }
+      #pngtree {
+        height: 50vh;
+      }
+      /*Home Section Css End*/
+      .productSection {
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 40px;
+      }
+      .productContainer {
+        box-shadow: 1px 1px 1px 0.8px;
+        width: 25%;
+        height: auto;
+        margin: 15px;
+        padding: 25px;
+        border-radius: 20px;
+        gap: 10px;
+        background-color: rgb(226, 222, 222);
+      }
+      /* .productContainer:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      } */
+      #onlineProductImage {
+        width: 95%;
+        height: 40vh;
+      }
+      .ProductsBtn {
+        display: flex;
+        justify-content: space-around;
+        margin: 15px;
+      }
+      #ProductText {
+      }
+      .ProductDescription {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      /*Product Css End*/
+      .ContactContainer {
+        display: flex;
+        min-height: 79vh;
+        width: 80%;
+        background-color: white;
+        margin-left: 150px;
+        margin-top: 50px;
+        height: 50vh;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+      }
+     
+      .contactImageDiv {
+        flex: 1;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #ContactImage {
+        max-width: 95%;
+        height: 79vh;
+      }
+
+      .contactFormDiv {
+        flex: 1;
+        background-color: #1e1f26;
+        color: white;
+        padding: 50px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .detail {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .detail h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+        font-weight: bold;
+      }
+
+      .detail input[type="text"] {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #ffffff44;
+        margin: 15px 0;
+        padding: 10px 5px;
+        font-size: 15px;
+        color: white;
+      }
+
+      .detail input::placeholder {
+        color: #ccc;
+      }
+
+      hr {
+        border: none;
+        height: 2px;
+        background-color: #ffffff44;
+        margin: 10px 0;
+      }
+
+      .detail button {
+        background-color: white;
+        color: black;
+        padding: 12px 25px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: 0.3s ease;
+      }
+
+      .detail button:hover {
+        background-color: #ccc;
+      }
+      /*Contact Css End*/
+      .aboutPage {
+        background-image: url("icon/laptop-sits-wooden-table.avif");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+      }
+
+      .aboutPage .text {
+        max-width: 800px;
+        text-align: center;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.4
+        ); /* Optional: semi-transparent background */
+        padding: 30px;
+        border-radius: 10px;
+      }
+
+      .aboutPage h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .aboutPage p {
+        font-size: 18px;
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+  <body>
+    <!--Nav Bar Start -->
+    <div class="container">
+      <div class="title">
+        <span><p class="titlename">Fast-Shop</p></span>
+      </div>
+      <div class="searchBox">
+        <input type="text" />
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="links">
+        <a href="#Home">Home</a>
+        <a href="#Products">Products</a>
+        <a href="#Contact">Contact</a>
+        <a href="#About">About</a>
+        <i id="cartBtnIcon" class="fas fa-shopping-cart"></i>
+      </div>
+    </div>
+    <!--Nav Bar End-->
+
+    <!--Home Section-->
+    <section id="Home">
+      <div class="homePart">
+        <div class="headingBox">
+          <h1 class="heading">Fast-Shop Is Best Website.</h1>
+          <p class="heading">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi.
+          </p>
+          <div class="btnDiv">
+            <button class="fancy-btn">View-Products</button>
+          </div>
+          <div class="imageContainer">
+            <img
+              id="pngtree"
+              src="icon/pngtree-online-shopping-png-image_5345788-removebg-preview.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="imageBox">
+          <img src="icon/Shopping-online-removebg-preview.png" alt="" />
+        </div>
+      </div>
+    </section>
+    <hr />
+    <!--Home Section End-->
+    <!--Products Section-->
+    <section id="Products">
+      <div class="productSection"></div>
+    </section>
+    <hr />
+    <!-- Contact Section Start -->
+    <section id="Contact">
+      <div class="ContactContainer">
+        <div class="contactImageDiv">
+          <img
+            id="ContactImage"
+            src="icon/ContactImage-removebg-preview.png"
+            alt="Contact Image"
+          />
+        </div>
+
+        <div class="contactFormDiv">
+          <div class="detail">
+            <h1>CONTACT FORM</h1>
+            <input type="text" placeholder="Enter your Name" />
+            <hr />
+            <input type="text" placeholder="Enter a valid email address" />
+            <hr />
+            <input type="text" placeholder="Enter your message" />
+            <hr />
+            <button>SUBMIT</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <section id="About">
+      <div class="aboutPage">
+        <div class="text">
+          <h1>ABOUT-US</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad,
+            tenetur? Ipsa perspiciatis ipsam temporibus, ex eum non ipsum? Dicta
+            soluta earum porro, modi consectetur quos. Consequatur provident
+            nisi, id dolorum sequi omnis repellendus quidem eligendi facere, et
+            optio autem quas sint dicta? Consequuntur veritatis quos dolores
+            perferendis obcaecati! Facilis, suscipit!
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Java Script Code Start -->
+    <script>
+      fetch("https://dummyjson.com/products?limit=500")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          let productSection =
+            document.getElementsByClassName("productSection")[0];
+          let productList = "";
+          let amount=0;
+          data.products.forEach((product) => {
+            amount=86*parseInt(product.price);
+            productList += `
+        <div class="productContainer">
+          <p id="ProductText"><b>Name:</b> ${product.title}</p>
+          <p id="ProductText"><b>Price:</b> ₹${Math.floor(amount)}</p>
+          <img
+            id="onlineProductImage"
+            src="${product.thumbnail}"
+            alt="Product Image"
+          />
+          <p id="ProductDescription">
+            <b>Rating:</b> ${product.rating}
+          </p>
+          <div class="ProductsBtn">
+            <button class="fancy-btn" onclick="openPopup(${product.id})">View Product</button>
+          </div>
+        </div>
+      `;
+          });
+          productSection.innerHTML = productList;
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+
+      function openPopup(productId) {
+        window.open(`productDetail.html?id=${productId}`, "_Self");
+      }
+
+      document.getElementById("cartBtnIcon").addEventListener("click", () => {
+        window.open(`addToCart.html`, "_Self");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail</title>
+    <style>
+      body {
+        font-family: "Trebuchet MS", Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .product-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 150px;
+      }
+
+      .product-card {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 800px;
+        width: 100%;
+      }
+
+      .product-card img {
+        width: 300px;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .product-info {
+        padding: 20px;
+        flex: 1;
+      }
+
+      .product-info h2 {
+        margin-top: 0;
+      }
+
+      .product-info p {
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .buy-button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
+      .buy-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="product-wrapper">
+      <div id="dataHandler" class="product-card">
+        <!-- Product data will load here -->
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+      let amount=0;
+      fetch(`https://dummyjson.com/products/${id}`)
+        .then((res) => res.json())
+        .then((product) => {
+          amount=86*parseInt(product.price);
+          const dataContainer = `
+            <img src="${product.thumbnail}" alt="Product Image" />
+            <div class="product-info">
+              <h2>${product.title}</h2>
+              <p><strong>Price:</strong> ₹${Math.floor(amount)}</p>
+              <p><strong>Rating:</strong> ${product.rating}</p>
+              <p><strong>Category:</strong> ${product.category}</p>
+              <p><strong>Description:</strong> ${product.description}</p>
+              <button class="buy-button" onclick="buyNow()">Buy Now</button>
+              <button class="buy-button" onclick="addtoCart(${product.id})">Add To Cart</button>
+            </div>
+          `;
+          document.getElementById("dataHandler").innerHTML = dataContainer;
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+      function buyNow() {
+        window.open(
+          "buyAmountCalculator.html",
+          "FormWindow",
+          "width=800,height=500,left=300,top=100"
+        );
+      }
+
+      function addtoCart(productId) {
+        fetch(`https://dummyjson.com/products/${productId}`)
+          .then((res) => res.json())
+          .then((product) => {
+     
+            const item = {
+              id: product.id,
+              title: product.title,
+              rating: product.rating,
+              price: product.price,
+              image: product.thumbnail,
+            };
+
+           
+            let cart = JSON.parse(localStorage.getItem("products")) || [];
+
+            // Check if product already exists in cart
+            const exists = cart.find((p) => p.id === item.id);
+            if (!exists) {
+              cart.push(item);
+              localStorage.setItem("products", JSON.stringify(cart));
+              alert("Product added to cart!");
+            } else {
+              alert("Product already in cart.");
+            }
+          })
+          .catch((error) => {
+            console.log("Error adding to cart:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

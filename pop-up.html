@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Customer Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f8f9fa;
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      form input,
+      form textarea,
+      form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      form button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      form button:hover {
+        background-color: #218838;
+      }
+      #paymentMethod {
+        width: 250px;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 2px solid #0d6efd;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        color: #212529;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      #paymentMethod:focus {
+        border-color: #198754;
+        outline: none;
+        box-shadow: 0 0 8px rgba(25, 135, 84, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Customer Details</h2>
+    <form id="customerForm">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="text" name="phone" placeholder="Phone Number" required />
+      <label for="paymentMethod">Select Payment Method:</label>
+      <select name="paymentMethod" id="paymentMethod" required>
+        <option value="debit">Debit Card</option>
+        <option value="credit">Credit Card</option>
+        <option value="cod">Cash-On-Delivery</option>
+      </select>
+      <textarea
+        name="address"
+        placeholder="Shipping Address"
+        rows="4"
+        required
+      ></textarea>
+      <h2 id="totalAmount">Total Amount:</h2>
+      <button type="submit">Submit Order</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("customerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const customerData = {
+            name: this.name.value,
+            email: this.email.value,
+            phone: this.phone.value,
+            address: this.address.value,
+          };
+          localStorage.setItem("customerData", JSON.stringify(customerData));
+          alert("Order Submitted! Thank you, " + customerData.name);
+          localStorage.clear();
+          window.close();
+        });
+
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+      var Amount=0;
+      products.forEach((product) => {
+        Amount=parseInt(Amount)+product.price;
+      });
+      let indainRuppe=86*Amount;
+      document.getElementById("totalAmount").innerHTML+="₹"+Math.floor(indainRuppe);;
+      function buyProduct() {
+        window.open(
+          "pop-up.html",
+          "FormWindow",
+          "width=800,height=500,left=300,top=100"
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Table</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        padding: 30px;
+        background-color: #f7f7f7;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      thead {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      img {
+        border-radius: 5px;
+      }
+
+      .btndiv {
+        display: flex;
+        justify-content: center;
+      }
+
+      #buybutton {
+        background-color: #28a745;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #buybutton:hover {
+        background-color: #218838;
+      }
+
+      #removebtn {
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Rating</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="btndiv">
+      <button id="buybutton" onclick="buyProduct()">Buy</button>
+    </div>
+
+    <script>
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      const tbody = document.querySelector("tbody");
+
+      function renderTable() {
+        tbody.innerHTML = "";
+
+        if (products.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5">🛒 Your cart is empty.</td></tr>`;
+          return;
+        }
+        let amount=0;
+        products.forEach((product, index) => {
+        amount=86*parseInt(product.price);
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${product.title}</td>
+        <td>${product.rating}</td>
+        <td>₹${Math.floor(amount)}</td>
+        <td><img src="${product.image}" width="60" /></td>
+        <td><button id="removebtn" onclick="removeItem(${index})">❌</button></td>
+      `;
+          tbody.appendChild(row);
+        });
+      }
+
+      function removeItem(index) {
+        products.splice(index, 1);
+        localStorage.setItem("products", JSON.stringify(products));
+        renderTable();
+      }
+
+      function buyProduct() {
+        window.open(
+          "pop-up.html",
+          "FormWindow",
+          "width=800,height=500,left=300,top=100"
+        );
+      }
+      renderTable();
+    </script>
+  </body>
+</html>
